@@ -217,10 +217,17 @@ core.register_node("jc_tnt:tnt", {
 			boom(pos, 4)
 		end
 	end,
+	after_place_node = function(pos, placer)
+		local meta = minetest.get_meta(pos);
+		meta:set_string("infotext",  "TNT ONLY USE BELOW -150 METERS ;-)  JOIN THEM FOR HUGE BOOM");
+	end,
 
 	mesecons = {
 		effector = {
 			action_on = function(pos, node)
+				if pos.y > -150 then
+					return
+				end
 				core.set_node(pos, {name="jc_tnt:tnt_burning"})
 				boom(pos, 0)
 			end
