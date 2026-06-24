@@ -209,6 +209,9 @@ core.register_node("jc_tnt:tnt", {
 
 	on_punch = function(pos, node, puncher)
 		if puncher:get_wielded_item():get_name() == "default:torch" then
+			if pos.y > -150 then
+				return
+			end
 			core.sound_play("tnt_ignite", {pos=pos})
 			core.set_node(pos, {name="jc_tnt:tnt_burning"})
 			boom(pos, 4)
