@@ -70,15 +70,15 @@ end
 
 boom = function(pos, time)
 	minetest.after(time, function(pos)
-		if minetest.get_node(pos).name ~= "tnt:tnt_burning" then
+		if minetest.get_node(pos).name ~= "jc_tnt:tnt_burning" then
 			return
 		end
 		minetest.sound_play("tnt_explode", {pos=pos, gain=1.5, max_hear_distance=2*64})
-		minetest.set_node(pos, {name="tnt:boom"})
+		minetest.set_node(pos, {name="jc_tnt:boom"})
 		minetest.after(0.5, function(pos)
 			minetest.remove_node(pos)
 		end, {x=pos.x, y=pos.y, z=pos.z})
-		
+
 
 		local radius = 2
 		local drops = {}
@@ -111,10 +111,10 @@ boom = function(pos, time)
 			end
 				for _,p in ipairs(list) do
 					local np = {x=pos.x+p.x, y=pos.y+p.y, z=pos.z+p.z}
-					
+
 					local node =  minetest.get_node(np)
 					if node.name == "air" then
-					elseif node.name == "tnt:tnt" or node.name == "tnt:tnt_burning" then
+					elseif node.name == "jc_tnt:tnt" or node.name == "jc_tnt:tnt_burning" then
 						if radius < radius_max then
 							if radius <= 5 then
 								radius = radius + 1
@@ -126,15 +126,15 @@ boom = function(pos, time)
 							minetest.remove_node(np, 2)
 						tnts = tnts + 1
 						else
-						minetest.set_node(np, {name="tnt:tnt_burning"})
+						minetest.set_node(np, {name="jc_tnt:tnt_burning"})
 						boom(np, 1)
 						end
 					elseif node.name == "fire:basic_flame"
-						--or string.find(node.name, "default:water_") 
-						--or string.find(node.name, "default:lava_") 
-						or node.name == "tnt:boom"
+						--or string.find(node.name, "default:water_")
+						--or string.find(node.name, "default:lava_")
+						or node.name == "jc_tnt:boom"
 						then
-						
+
 					else
 						if math.abs(p.x)<2 and math.abs(p.y)<2 and math.abs(p.z)<2 then
 							destroy(drops, np, dr == radius, radius > 7)
@@ -197,38 +197,38 @@ boom = function(pos, time)
 	end, pos)
 end
 
-minetest.register_node("tnt:tnt", {
+minetest.register_node("jc_tnt:tnt", {
 	description = "TNT -ONLY USE BELOW -150 METERS ;-)  JOIN THEM FOR HUGE BOOM",
 	tiles = {"tnt_top.png", "tnt_bottom.png", "tnt_side.png"},
 	groups = {dig_immediate=2, mesecon=2},
 	sounds = default.node_sound_wood_defaults(),
-	
+
 	on_punch = function(pos, node, puncher)
 		if puncher:get_wielded_item():get_name() == "default:torch" then
 			minetest.sound_play("tnt_ignite", {pos=pos})
-			minetest.set_node(pos, {name="tnt:tnt_burning"})
+			minetest.set_node(pos, {name="jc_tnt:tnt_burning"})
 			boom(pos, 4)
 		end
 	end,
-	
+
 	mesecons = {
 		effector = {
 			action_on = function(pos, node)
-				minetest.set_node(pos, {name="tnt:tnt_burning"})
+				minetest.set_node(pos, {name="jc_tnt:tnt_burning"})
 				boom(pos, 0)
 			end
 		},
 	},
 })
 
-minetest.register_node("tnt:tnt_burning", {
+minetest.register_node("jc_tnt:tnt_burning", {
 	tiles = {{name="tnt_top_burning_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1}}, "tnt_bottom.png", "tnt_side.png"},
 	light_source = 5,
 	drop = "",
 	sounds = default.node_sound_wood_defaults(),
 })
 
-minetest.register_node("tnt:boom", {
+minetest.register_node("jc_tnt:boom", {
 	drawtype = "plantlike",
 	tiles = {"tnt_boom.png"},
 	light_source = LIGHT_MAX,
@@ -238,20 +238,20 @@ minetest.register_node("tnt:boom", {
 })
 
 burn = function(pos)
-	if minetest.get_node(pos).name == "tnt:tnt" then
+	if minetest.get_node(pos).name == "jc_tnt:tnt" then
 		minetest.sound_play("tnt_ignite", {pos=pos})
-		minetest.set_node(pos, {name="tnt:tnt_burning"})
+		minetest.set_node(pos, {name="jc_tnt:tnt_burning"})
 		boom(pos, 1)
 		return
 	end
-	if minetest.get_node(pos).name ~= "tnt:gunpowder" then
+	if minetest.get_node(pos).name ~= "jc_tnt:gunpowder" then
 		return
 	end
 	minetest.sound_play("tnt_gunpowder_burning", {pos=pos, gain=2})
-	minetest.set_node(pos, {name="tnt:gunpowder_burning"})
-	
+	minetest.set_node(pos, {name="jc_tnt:gunpowder_burning"})
+
 	minetest.after(1, function(pos)
-		if minetest.get_node(pos).name ~= "tnt:gunpowder_burning" then
+		if minetest.get_node(pos).name ~= "jc_tnt:gunpowder_burning" then
 			return
 		end
 		minetest.after(0.5, function(pos)
@@ -263,7 +263,7 @@ burn = function(pos)
 					pos.x = pos.x+dx
 					pos.y = pos.y+dy
 					pos.z = pos.z+dz
-					
+
 					if not (math.abs(dx) == 1 and math.abs(dz) == 1) then
 						if dy == 0 then
 							burn({x=pos.x, y=pos.y, z=pos.z})
@@ -273,7 +273,7 @@ burn = function(pos)
 							end
 						end
 					end
-					
+
 					pos.x = pos.x-dx
 					pos.y = pos.y-dy
 					pos.z = pos.z-dz
@@ -283,7 +283,7 @@ burn = function(pos)
 	end, pos)
 end
 
-minetest.register_node("tnt:gunpowder", {
+minetest.register_node("jc_tnt:gunpowder", {
 	description = "Gun Powder",
 	drawtype = "raillike",
 	paramtype = "light",
@@ -298,7 +298,7 @@ minetest.register_node("tnt:gunpowder", {
 	},
 	groups = {dig_immediate=2,attached_node=1},
 	sounds = default.node_sound_leaves_defaults(),
-	
+
 	on_punch = function(pos, node, puncher)
 		if puncher:get_wielded_item():get_name() == "default:torch" then
 			burn(pos)
@@ -306,7 +306,7 @@ minetest.register_node("tnt:gunpowder", {
 	end,
 })
 
-minetest.register_node("tnt:gunpowder_burning", {
+minetest.register_node("jc_tnt:gunpowder_burning", {
 	drawtype = "raillike",
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -323,13 +323,13 @@ minetest.register_node("tnt:gunpowder_burning", {
 })
 
 minetest.register_abm({
-	nodenames = {"tnt:tnt", "tnt:gunpowder"},
+	nodenames = {"jc_tnt:tnt", "jc_tnt:gunpowder"},
 	neighbors = {"fire:basic_flame", "default:lava_source", "default:lava_flowing"},
 	interval = 2,
 	chance = 10,
 	action = function(pos, node)
-		if node.name == "tnt:tnt" then
-			minetest.set_node(pos, {name="tnt:tnt_burning"})
+		if node.name == "jc_tnt:tnt" then
+			minetest.set_node(pos, {name="jc_tnt:tnt_burning"})
 			boom({x=pos.x, y=pos.y, z=pos.z}, 0)
 		else
 			burn(pos)
@@ -338,16 +338,16 @@ minetest.register_abm({
 })
 
 minetest.register_craft({
-	output = "tnt:gunpowder",
+	output = "jc_tnt:gunpowder",
 	type = "shapeless",
 	recipe = {"default:coal_lump", "default:gravel"}
 })
 
 minetest.register_craft({
-	output = "tnt:tnt",
+	output = "jc_tnt:tnt",
 	recipe = {
 		{"", "group:wood", ""},
-		{"group:wood", "tnt:gunpowder", "group:wood"},
+		{"group:wood", "jc_tnt:gunpowder", "group:wood"},
 		{"", "group:wood", ""}
 	}
 })
