@@ -373,25 +373,13 @@ core.register_alias_force("tnt:tnt_burning", "jc_tnt:tnt_burning")
 core.register_alias_force("tnt:tnt_stick", "jc_tnt:tnt")
 
 core.register_on_mods_loaded(function()
-  local hide = {
-    "tnt:gunpowder",
-    "tnt:gunpowder_burning",
-    "tnt:tnt",
-    "tnt:tnt_burning",
-    "tnt:tnt_stick",
-  }
-
-  for _, name in ipairs(hide) do
-    if core.registered_items[name] then
-      local groups = table.copy(
-        core.registered_items[name].groups or {}
-      )
-      groups.not_in_creative_inventory = 1
-
-      core.override_item(name, {
-        groups = groups,
-      })
-    end
+  if unified_inventory then
+    unified_inventory.set_inventory_formspec = unified_inventory.set_inventory_formspec
+    unified_inventory.register_hidden_item("tnt:tnt")
+    unified_inventory.register_hidden_item("tnt:tnt_stick")
+    unified_inventory.register_hidden_item("tnt:gunpowder")
+    unified_inventory.register_hidden_item("tnt:gunpowder_burning")
+    unified_inventory.register_hidden_item("tnt:tnt_burning")
   end
 end)
 
