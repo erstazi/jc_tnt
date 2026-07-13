@@ -202,7 +202,7 @@ boom = function(pos, time)
 end
 
 core.register_node("jc_tnt:tnt", {
-	description = "TNT -ONLY USE BELOW -150 METERS ;-)  JOIN THEM FOR HUGE BOOM",
+	description = "TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM",
 	tiles = {"tnt_top.png", "tnt_bottom.png", "tnt_side.png"},
 	groups = {dig_immediate=2, mesecon=2},
 	sounds = default.node_sound_wood_defaults(),
@@ -219,7 +219,7 @@ core.register_node("jc_tnt:tnt", {
 	end,
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos);
-		meta:set_string("infotext",  "TNT ONLY USE BELOW -150 METERS ;-)  JOIN THEM FOR HUGE BOOM");
+		meta:set_string("infotext",  "TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM");
 	end,
 
 	mesecons = {
@@ -366,10 +366,11 @@ core.register_craft({
 	}
 })
 
-core.register_alias("tnt:gunpowder", "jc_tnt:gunpowder")
-core.register_alias("tnt:gunpowder_burning", "jc_tnt:gunpowder_burning")
-core.register_alias("tnt:tnt", "jc_tnt:tnt")
-core.register_alias("tnt:tnt_burning", "jc_tnt:tnt_burning")
+core.register_alias_force("tnt:gunpowder", "jc_tnt:gunpowder")
+core.register_alias_force("tnt:gunpowder_burning", "jc_tnt:gunpowder_burning")
+core.register_alias_force("tnt:tnt", "jc_tnt:tnt")
+core.register_alias_force("tnt:tnt_burning", "jc_tnt:tnt_burning")
+core.register_alias_force("tnt:tnt_stick", "jc_tnt:tnt")
 
 if core.settings:get("log_mods") then
 	core.log("action", "tnt loaded")
