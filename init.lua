@@ -372,16 +372,16 @@ core.register_alias_force("tnt:tnt", "jc_tnt:tnt")
 core.register_alias_force("tnt:tnt_burning", "jc_tnt:tnt_burning")
 core.register_alias_force("tnt:tnt_stick", "jc_tnt:tnt")
 
-core.register_on_mods_loaded(function()
-  if unified_inventory then
-    unified_inventory.set_inventory_formspec = unified_inventory.set_inventory_formspec
-    unified_inventory.register_hidden_item("tnt:tnt")
-    unified_inventory.register_hidden_item("tnt:tnt_stick")
-    unified_inventory.register_hidden_item("tnt:gunpowder")
-    unified_inventory.register_hidden_item("tnt:gunpowder_burning")
-    unified_inventory.register_hidden_item("tnt:tnt_burning")
-  end
-end)
+-- core.register_on_mods_loaded(function()
+  -- if unified_inventory then
+    -- unified_inventory.set_inventory_formspec = unified_inventory.set_inventory_formspec
+    -- unified_inventory.register_hidden_item("tnt:tnt")
+    -- unified_inventory.register_hidden_item("tnt:tnt_stick")
+    -- unified_inventory.register_hidden_item("tnt:gunpowder")
+    -- unified_inventory.register_hidden_item("tnt:gunpowder_burning")
+    -- unified_inventory.register_hidden_item("tnt:tnt_burning")
+  -- end
+-- end)
 
 core.register_lbm({
   name = "jc_tnt:convert_old_tnt",
