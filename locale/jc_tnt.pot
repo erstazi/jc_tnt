@@ -1,0 +1,11 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jc_tnt\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM"
+msgstr ""
+
+msgid "Gun Powder"
+msgstr ""

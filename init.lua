@@ -1,3 +1,5 @@
+local S = core.get_translator(core.get_current_modname())
+
 -- loss probabilities array (one in X will be lost)
 local loss_prob = {}
 
@@ -202,7 +204,7 @@ boom = function(pos, time)
 end
 
 core.register_node("jc_tnt:tnt", {
-  description = "TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM",
+  description = S("TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM"),
   tiles = {"tnt_top.png", "tnt_bottom.png", "tnt_side.png"},
   groups = {dig_immediate=2, mesecon=2},
   sounds = default.node_sound_wood_defaults(),
@@ -219,7 +221,7 @@ core.register_node("jc_tnt:tnt", {
   end,
   after_place_node = function(pos, placer)
     local meta = minetest.get_meta(pos);
-    meta:set_string("infotext",  "TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM");
+    meta:set_string("infotext",  S("TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM") );
   end,
 
   mesecons = {
@@ -240,6 +242,7 @@ core.register_node("jc_tnt:tnt_burning", {
   light_source = 5,
   drop = "",
   sounds = default.node_sound_wood_defaults(),
+  groups = { not_in_creative_inventory = 1, },
 })
 
 core.register_node("jc_tnt:boom", {
@@ -248,7 +251,7 @@ core.register_node("jc_tnt:boom", {
   light_source = core.LIGHT_MAX,
   walkable = false,
   drop = "",
-  groups = {dig_immediate=3},
+  groups = {dig_immediate=3, not_in_creative_inventory = 1,},
 })
 
 burn = function(pos)
@@ -298,7 +301,7 @@ burn = function(pos)
 end
 
 core.register_node("jc_tnt:gunpowder", {
-  description = "Gun Powder",
+  description = S("Gun Powder"),
   drawtype = "raillike",
   paramtype = "light",
   sunlight_propagates = true,
@@ -332,7 +335,7 @@ core.register_node("jc_tnt:gunpowder_burning", {
     fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
   },
   drop = "",
-  groups = {dig_immediate=2,attached_node=1},
+  groups = {dig_immediate=2,attached_node=1,not_in_creative_inventory = 1},
   sounds = default.node_sound_leaves_defaults(),
 })
 

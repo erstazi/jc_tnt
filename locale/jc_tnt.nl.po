@@ -1,0 +1,12 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jc_tnt\n"
+"Language: nl\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM"
+msgstr "TNT - ALLEEN GEBRUIKEN ONDER -150 METER - VOEG ZE SAMEN VOOR EEN ENORME EXPLOSIE"
+
+msgid "Gun Powder"
+msgstr "Buskruit"
