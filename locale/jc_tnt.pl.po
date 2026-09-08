@@ -6,7 +6,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "TNT - ONLY USE BELOW -150 METERS - JOIN THEM FOR HUGE BOOM"
-msgstr "TNT - STOSOWAĆ WYŁĄCZNIE PONIŻEJ -150 METRÓW - DOŁĄCZ DO NICH, ABY DOŚWIADCZYĆ POTĘŻNEGO WYBUCHU"
+msgstr "TNT - DO UŻYTKU WYŁĄCZNIE PONIŻEJ -150 METRÓW - POŁĄCZ JE, ABY UZYSKAĆ POTĘŻNY WYBUCH"
 
 msgid "Gun Powder"
 msgstr "Proch Strzelniczy"
